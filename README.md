@@ -7,6 +7,22 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Admin User 
+Copiar estos al .env para generar el usuario por defecto 
+ADMIN_NAME="Administrador"
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=password
+
+
+## Dev Setup
+composer install
+npm install
+php artisan key:generate
+npm run dev o npm run prod 
+php artisan migrate 
+composer dumpautoload
+php artisan db:seed --force
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
