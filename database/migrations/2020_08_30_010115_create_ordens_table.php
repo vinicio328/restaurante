@@ -18,6 +18,12 @@ class CreateOrdensTable extends Migration
             $table->timestamps();
             $table->string('nit')->default('CF');
             $table->string('nombre')->default('CF');
+            $table->integer('estado');
+            // 1= creada;
+            // 2= en proceso
+            // 3= en entrega
+            // 4= completada
+            // 5= cancelada
             $table->decimal('total', 8, 2);
         });
     }
