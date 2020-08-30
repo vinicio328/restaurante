@@ -18,7 +18,7 @@ class CreateMenusTable extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->binary('imagen');
+            $table->binary('imagen')->nullable();
             $table->decimal('costo', 8, 2);            
         });
     }

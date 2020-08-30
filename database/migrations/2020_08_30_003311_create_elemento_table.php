@@ -19,7 +19,7 @@ class CreateElementoTable extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->boolean('sin_costo');
-            $table->binary('imagen');
+            $table->binary('imagen')->nullable();
             $table->decimal('costo', 8, 2);
         });
     }

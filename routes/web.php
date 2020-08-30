@@ -18,3 +18,15 @@ App::setLocale('es');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => '', 
+              'middleware' => ['auth', 'acl'],
+              'is' => 'administrator'], 
+function () {
+    Route::resource('elementos', 'ElementoController');
+});
+
+
+
+
+
