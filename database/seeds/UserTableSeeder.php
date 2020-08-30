@@ -12,8 +12,7 @@ class UserTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        if(config('admin.admin_name')) {
+    {        
 
             $role = new Role();
             $roleAdmin = $role->create([
@@ -79,7 +78,6 @@ class UserTableSeeder extends Seeder
             );
 
             $mostrador->assignRole($roleMostrador);
-
-        }
+        
     }
 } 
