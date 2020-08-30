@@ -162,9 +162,12 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
+        Kodeine\Acl\AclServiceProvider::class,
+        
 
         /*
          * Application Service Providers...

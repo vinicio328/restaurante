@@ -7,21 +7,42 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## Admin User 
-Copiar estos al .env para generar el usuario por defecto 
-ADMIN_NAME="Administrador"
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=password
-
-
 ## Dev Setup
-composer install
-npm install
-php artisan key:generate
-npm run dev o npm run prod 
-php artisan migrate 
-composer dumpautoload
-php artisan db:seed --force
+<ul>
+	<li>composer install</li>	
+	<li>npm install</li>
+	<li>renombrar el .env.example a .env</li>
+	<li>php artisan key:generate</li>
+	<li>"npm run dev" O "npm run prod"</li>
+	<li>php artisan migrate </li>
+	<li>composer dumpautoload</li>
+	<li>php artisan migrate</li>
+	<li>php artisan db:seed --force</li>
+</ul>
+
+
+## Usuarios 
+<h3>Admin</h3>
+<p>
+	admin@example.com
+	password
+</p>
+<h3>Cocinero</h3>
+<p>
+	cocinero@example.com
+	password
+</p>
+<h3>Cajero</h3>
+<p>
+	cajero@example.com
+	password
+</p>
+<h3>Mostrador</h3>
+<p>
+	mostrador@example.com
+	password
+</p>
+
 
 ## About Laravel
 
