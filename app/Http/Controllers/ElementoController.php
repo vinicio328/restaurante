@@ -16,7 +16,8 @@ class ElementoController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$elementos = Elemento::all();
+		return view('elementos.index', compact('elementos'));
 	}
 
 	/**
@@ -47,8 +48,8 @@ class ElementoController extends Controller
 		$elemento = new Elemento([
 			'nombre' => $request->get('nombre'),
 			'descripcion' => $request->get('descripcion'),
-			'sin_costo' => $request->has('sin_costo') ? true : false,
-			'costo' => $request->get('costo')
+			'sin_costo' => $request->has('sin_costo'),
+			'costo' => $request->has('sin_costo') ? 0 : $request->get('costo')
 		]);
 		$elemento->save();
 		return redirect('/elementos')->with('success', '¡Elemento guardado!');

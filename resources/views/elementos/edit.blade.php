@@ -43,6 +43,7 @@
 			  		@enderror
 			  	</div>
 				<button type="submit" class="btn btn-primary">Agregar</button>
+				<a rel="button" href="{{ route('elementos.index') }}" class="btn btn-secondary">Cancelar</a>
 			</form>
 	  </div>
 	</div>
