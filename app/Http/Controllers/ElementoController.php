@@ -93,8 +93,10 @@ class ElementoController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Elemento $elemento)
 	{
-		//
+		$elemento->delete();
+
+        return redirect('/elementos')->with('success', '¡Elemento borrado!');
 	}
 }
