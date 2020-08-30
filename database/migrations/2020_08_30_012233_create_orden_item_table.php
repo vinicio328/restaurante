@@ -30,7 +30,7 @@ class CreateOrdenItemTable extends Migration
     		// 3= en entrega
     		// 4= completada
     		// 5= cancelada
-    		$table->integer('cantidad');
+    		$table->integer('cantidad')->default(1);
     		$table->decimal('precio', 8, 2);
     		$table->boolean('es_custom')->default(false);
     		$table->boolean('es_extra')->default(false);

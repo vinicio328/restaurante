@@ -8,6 +8,10 @@ class Elemento extends Model
 {
 	protected $fillable = ['nombre', 'descripcion', 'sin_costo', 'imagen', 'costo'];
 
+	protected $casts = [
+        'sin_costo' => 'boolean'
+    ];
+
 	public function menus()
 	{
 		return $this->belongsToMany(Menu::class, 'elemento_menu');

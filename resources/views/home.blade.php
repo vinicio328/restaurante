@@ -15,7 +15,7 @@
                 <p>
                     Administre los elementos, los elementos son los alimentos individuales
                 </p>
-                <a class="btn btn-lg btn-block btn-primary" >Administrar</a>
+                <a href="{{ route('elementos.index') }}" class="btn btn-lg btn-block btn-primary" >Administrar</a>
             </div>
         </div>
         <div class="card mb-4 box-shadow">

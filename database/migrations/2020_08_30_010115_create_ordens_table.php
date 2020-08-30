@@ -18,7 +18,7 @@ class CreateOrdensTable extends Migration
             $table->timestamps();
             $table->string('nit')->default('CF');
             $table->string('nombre')->default('CF');
-            $table->integer('estado');
+            $table->integer('estado')->default(1);
             // 1= creada;
             // 2= en proceso
             // 3= en entrega

@@ -23,5 +23,6 @@ Route::group(['prefix' => '',
               'middleware' => ['auth', 'acl'],
               'is' => 'administrator'], 
 function () {
+	Route::resource('elementos', 'ElementoController');
     Route::resource('menus', 'MenuController');
 });
