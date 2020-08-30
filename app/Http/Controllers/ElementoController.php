@@ -38,21 +38,7 @@ class ElementoController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		
-		$request->validate([
-			'nombre'=>'required',
-			'descripcion'=>'required',
-			'costo'=>'required'
-		]);
-
-		$elemento = new Elemento([
-			'nombre' => $request->get('nombre'),
-			'descripcion' => $request->get('descripcion'),
-			'sin_costo' => $request->has('sin_costo'),
-			'costo' => $request->has('sin_costo') ? 0 : $request->get('costo')
-		]);
-		$elemento->save();
-		return redirect('/elementos')->with('success', '¡Elemento guardado!');
+		return $this->update($request, new Elemento());		
 	}
 
 	/**
@@ -84,9 +70,21 @@ class ElementoController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request, Elemento $elemento)
 	{
-		//
+		$request->validate([
+			'nombre'=>'required',
+			'descripcion'=>'required',
+			'costo'=>'required'
+		]);
+
+		$elemento->nombre = $request->get('nombre');
+		$elemento->descripcion = $request->get('descripcion');
+		$elemento->sin_costo = $request->has('sin_costo');
+		$elemento->costo = $request->has('sin_costo') ? 0 : $request->get('costo');
+
+		$elemento->save();
+		return redirect('/elementos')->with('success', '¡Elemento guardado!');
 	}
 
 	/**

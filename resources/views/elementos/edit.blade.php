@@ -2,14 +2,17 @@
 
 @section('content')
 <div class="row">
-	<div class="col-sm-8 offset-sm-2">
-		<h1>Agregar un elemento</h1>
-		<br>
-		<div>	
+	<div class="col-sm-8 offset-sm-2">		
 			@if($elemento->exists)
+			<h1>Editar elemento: {{$elemento->nombre}}</h1>
+			<br>
+			<div>	
 				<form class="flex flex-col w-full" method="POST" action="{{ route('elementos.update',$elemento) }}">
 					@method('put')
 			@else
+			<h1>Agregar un elemento</h1>
+			<br>
+			<div>	
 				<form class="flex flex-col w-full" method="POST" action="{{ route('elementos.store') }}">
 			@endif
 				@csrf
@@ -42,7 +45,13 @@
 			  		<p class="text-danger text-xs italic mt-4">{{ $message }}</p>
 			  		@enderror
 			  	</div>
-				<button type="submit" class="btn btn-primary">Agregar</button>
+				<button type="submit" class="btn btn-primary">
+					@if($elemento->exists)
+					Actualizar
+					@else
+					Agregar
+					@endif
+				</button>
 				<a rel="button" href="{{ route('elementos.index') }}" class="btn btn-secondary">Cancelar</a>
 			</form>
 	  </div>
