@@ -18,3 +18,12 @@ App::setLocale('es');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => '', 
+              'middleware' => ['auth', 'acl'],
+              'is' => 'cocinero'], 
+function () {
+	Route::resource('verorden', 'VerOrdenController');
+});
+
+
