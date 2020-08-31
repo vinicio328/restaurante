@@ -15,7 +15,7 @@ class VerOrdenController extends Controller
      */
     public function index()    
     {
-        $ordens = Orden::whereRaw('estado not in (4, 5)')
+        $ordens = Orden::whereRaw('estado in (1, 2)')
         ->orderBy('created_at')
         ->get();
 
@@ -74,7 +74,10 @@ class VerOrdenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $orden = Orden::find($id);
+        $orden->estado = $request->get('estado');
+        $orden->save();
+        return redirect('/verorden')->with('success', '¡Orden actualizada!');
     }
 
     /**

@@ -8,26 +8,29 @@ class Orden extends Model
 {
     // Agregar mutador 
     // 1= creada;
-            // 2= en proceso
-            // 3= en entrega
-            // 4= completada
-            // 5= cancelada
+    // 2= en proceso
+    // 3= en entrega
+    // 4= completada
+    // 5= cancelada
     public function getEstadoAttribute($value)
     {
         if ($value == 1) {
-            return "Creada";
+            return "Pendiente";
         }
         else if ($value == 2)
         {
             return "En Proceso";
         }
-        else if ($value ==3) {
+        else if ($value ==3) 
+        {
             return "En Entrega";
         }
-        else if ($value == 4) {
+        else if ($value == 4) 
+        {
             return "Completada";
         }
-        else  {
+        else  
+        {
             return "Cancelada";
         }
     }
