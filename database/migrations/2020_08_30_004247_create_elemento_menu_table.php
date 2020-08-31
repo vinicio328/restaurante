@@ -31,7 +31,7 @@ class CreateElementoMenuTable extends Migration
 			->onDelete('cascade');
 
 			$table->integer('cantidad')
-				->dfault(1);
+				->default(1);
 			$table->boolean('custom')
 				->default(false);
 			

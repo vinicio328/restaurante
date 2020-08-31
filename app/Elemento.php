@@ -21,4 +21,8 @@ class Elemento extends Model
     {
         return $this->morphToMany(Orden::class, 'orden_item');
     }
+
+   	public function items() {
+    	return $this->hasMany(ElementoMenu::class, 'elemento_id');
+    }
 }

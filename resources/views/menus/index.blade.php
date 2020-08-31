@@ -36,6 +36,9 @@
 						<a href="{{ route('menus.edit', $menu->id)}}" class="btn btn-primary">Editar</a>
 					</td>
 					<td>
+						<a href="{{ route('menus.show', $menu->id)}}" class="btn btn-primary">Detalles</a>
+					</td>
+					<td>
 						<form action="{{ route('menus.destroy', $menu->id)}}" method="post">
 							@csrf
 							@method('DELETE')

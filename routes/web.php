@@ -25,4 +25,5 @@ Route::group(['prefix' => '',
 function () {
 	Route::resource('elementos', 'ElementoController');
     Route::resource('menus', 'MenuController');
+    Route::put('menus/{menu}/attach', 'MenuController@attach')->name('menus.attach');
 });
