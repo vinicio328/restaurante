@@ -26,6 +26,13 @@ function () {
     Route::resource('elementos', 'ElementoController');
 });
 
+Route::group(['prefix' => '', 
+              'middleware' => ['auth', 'acl'],
+              'is' => 'cocinero'], 
+function () {
+	Route::resource('verorden', 'VerOrdenController');
+});
+
 
 
 

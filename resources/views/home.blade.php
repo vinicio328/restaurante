@@ -61,7 +61,7 @@
             </div>
             <div class="card-body">
                 
-                <a class="btn btn-lg btn-block btn-primary" >Ver ordenes pendientes</a>
+                <a class="btn btn-lg btn-block btn-primary" href="{{ route('verorden.index') }}">Ver ordenes pendientes</a>
             </div>
         </div>
         @endrole
