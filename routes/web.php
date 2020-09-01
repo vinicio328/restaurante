@@ -21,7 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => '', 
               'middleware' => ['auth', 'acl'],
-              'is' => 'cocinero'], 
+              'is' => 'cocinero||cajero'], 
 function () {
 	Route::resource('verorden', 'VerOrdenController');
 });

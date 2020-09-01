@@ -36,8 +36,12 @@
                 <h4 class="my-0 font-weight-normal">Ordenes</h4>
             </div>
             <div class="card-body">
-                
-                <a class="btn btn-lg btn-block btn-primary" >Crear orden</a>
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-lg btn-primary" href="{{ route('verorden.index') }}">Ver ordenes pendientes</a>
+                        <a class="btn btn-lg btn-primary" >Crear orden</a>
+                    </div>
+                </div>                
             </div>
         </div>
         @endrole
