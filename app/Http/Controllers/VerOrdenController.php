@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Orden;
 
 class VerOrdenController extends Controller
@@ -15,9 +16,16 @@ class VerOrdenController extends Controller
      */
     public function index()    
     {
+        $user = Auth::user();
         $ordens = Orden::whereRaw('estado in (1, 2)')
         ->orderBy('created_at')
         ->get();
+
+        if ($user->hasRole('mostrador')) {
+            $ordens = Orden::where('estado', 3)
+                ->orderBy('created_at')
+                ->get();
+        }        
 
         return view('verorden.index', compact('ordens'));
     }
