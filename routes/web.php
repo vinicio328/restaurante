@@ -23,8 +23,13 @@ Route::group(['prefix' => '',
               'middleware' => ['auth', 'acl'],
               'is' => 'administrator'], 
 function () {
-    Route::resource('elementos', 'ElementoController');
+	Route::resource('elementos', 'ElementoController');
+    Route::resource('menus', 'MenuController');
+    Route::put('menus/{menu}/attach', 'MenuController@attach')->name('menus.attach');
+    Route::put('menus/{menu}/detach', 'MenuController@detach')->name('menus.detach');
+    Route::put('menus/{menu}/updateitem', 'MenuController@updateItem')->name('menus.updateitem');
 });
+
 
 Route::group(['prefix' => '', 
               'middleware' => ['auth', 'acl'],
@@ -32,8 +37,3 @@ Route::group(['prefix' => '',
 function () {
 	Route::resource('verorden', 'VerOrdenController');
 });
-
-
-
-
-
