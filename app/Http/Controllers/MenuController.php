@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Menu;
 use App\Elemento;
+use App\ElementoMenu;
 use App\Http\Requests\TemplateForm;
 
 class MenuController extends Controller
@@ -87,13 +88,29 @@ class MenuController extends Controller
 		$menu->costo = $request->get('costo');
 
 		$menu->save();
-		return redirect('/menus')->with('success', 'Menu guardado!');
+		return redirect('/menus')->with('success', '¡Menu guardado!');
+	}
+
+	public function updateItem(Request $request, Menu $menu) 
+	{
+		$elemento_id = $request->get('elemento_id');
+		$cantidad = $request->get('cantidad');
+		$elemento = ElementoMenu::find($elemento_id);
+		$elemento->cantidad = $cantidad;
+		$elemento->save();
+		return redirect()->route('menus.show', $menu)->with('success', '¡Menu guardado!');
 	}
 
 	public function attach(Request $request, Menu $menu)
 	{
 		$menu->elementos()->attach($request->get('elemento_id'));
-		return redirect()->route('menus.show', $menu)->with('success', 'Menu guardado!');
+		return redirect()->route('menus.show', $menu)->with('success', '¡Menu guardado!');
+	}
+
+	public function detach(Request $request, Menu $menu)
+	{
+		$menu->elementos()->detach($request->get('elemento_id'));
+		return redirect()->route('menus.show', $menu)->with('success', '¡Menu guardado!');
 	}
 
 	/**

@@ -14,6 +14,7 @@ class CreateElementoMenuTable extends Migration
 	public function up()
 	{
 		Schema::create('elemento_menu', function (Blueprint $table) {
+			$table->id();
 			$table->integer('elemento_id')
 			->unsigned()
 			->index()
