@@ -14,6 +14,7 @@ class CreateElementoMenuTable extends Migration
 	public function up()
 	{
 		Schema::create('elemento_menu', function (Blueprint $table) {
+			$table->id();
 			$table->integer('elemento_id')
 			->unsigned()
 			->index()
@@ -31,7 +32,7 @@ class CreateElementoMenuTable extends Migration
 			->onDelete('cascade');
 
 			$table->integer('cantidad')
-				->dfault(1);
+				->default(1);
 			$table->boolean('custom')
 				->default(false);
 			
