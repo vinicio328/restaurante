@@ -33,7 +33,7 @@ function () {
 
 Route::group(['prefix' => '', 
               'middleware' => ['auth', 'acl'],
-              'is' => 'cocinero'], 
+              'is' => 'cocinero||cajero||mostrador'], 
 function () {
 	Route::resource('verorden', 'VerOrdenController');
 });
