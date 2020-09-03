@@ -46,5 +46,6 @@ Route::group(['prefix' => '',
 	'middleware' => ['auth', 'acl'],
 	'is' => 'cajero'], 
 	function () {
-		Route::resource('ordenes', 'OrdenController');
+		Route::resource('ordens', 'OrdenController');
+		Route::put('ordens/{orden}/attach', 'OrdenController@attach')->name('ordens.attach');
 	});

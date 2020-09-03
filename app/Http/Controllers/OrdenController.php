@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Orden;
+use App\Elemento;
+use App\Menu;
+use App\OrdenItem;
+use App\ElementoMenu;
+use Illuminate\Support\Facades\DB;
 
 class OrdenController extends Controller
 {
@@ -24,7 +29,7 @@ class OrdenController extends Controller
 	 */
 	public function create()
 	{
-		$orden = new Orden();
+		$orden = new Orden();		
 		return view('ordenes.edit')->withOrden($orden);
 	}
 
@@ -47,7 +52,9 @@ class OrdenController extends Controller
 	 */
 	public function show(Orden $orden)
 	{
-		return view('ordenes.show')->withOrden($orden);
+		$elementos = Elemento::all();
+		$menus = Menu::all();
+		return view('ordenes.show')->withOrden($orden)->withMenus($menus)->withElementos($elementos);
 	}
 
 	/**
@@ -91,14 +98,65 @@ class OrdenController extends Controller
 		return redirect()->route('ordenes.show', $orden)->with('success', '¡Orden creada!');
 	}
 
+	public function attach(Request $request, Orden $orden) 
+	{
+		$elemento_id = $request->get('elemento_id');
+		$type = $request->get('elemento_type');
+
+		$orden_item = new OrdenItem();
+		$orden_item->orden_id = $orden->id;
+		$orden_item->item_id = $elemento_id;
+		$orden_item->cantidad = 1;
+		$orden_item->item_type = $type;
+
+		if ($type == 'menu') 
+		{	
+			$menu = Menu::find($elemento_id);
+			$orden_item->es_custom = false;
+			$orden_item->es_extra =false;
+			$orden_item->precio = $menu->costo;
+			$orden_item->save();
+
+			foreach ($menu->elementos as $elemento) {
+				$elemento_menu = ElementoMenu::where('menu_id', $menu->id)
+					->where('elemento_id', $elemento->id)->firstOrFail();
+				$sub_item = new OrdenItem();
+				$sub_item->orden_id = $orden->id;
+				$sub_item->item_id = $elemento->id;
+				$sub_item->cantidad = $elemento_menu->cantidad;
+				$sub_item->item_type = 'elemento';
+				$sub_item->parent_id = $orden_item->id;
+				$sub_item->es_custom = false;
+				$sub_item->es_extra =false;
+				$sub_item->precio = 0;
+				$sub_item->save();
+			}
+
+			$orden->total += $menu->costo;
+			$orden->save();
+
+		} else {
+			$elemento = Elemento::find($elemento_id);
+			$orden_item->es_custom = false;
+			$orden_item->es_extra =false;
+			$orden_item->precio = $elemento->costo;
+			$orden_item->save();
+			$orden->total += $elemento->costo;
+			$orden->save();
+		}
+		return redirect()->route('ordens.show', $orden)->with('success', '¡Orden actualizada!');
+	}
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Orden $orden)
 	{
-		//
+		$orden->delete();
+
+		return redirect('/')->with('success', '¡Orden borrada!');
 	}
 }

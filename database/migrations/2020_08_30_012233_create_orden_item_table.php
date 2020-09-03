@@ -14,22 +14,21 @@ class CreateOrdenItemTable extends Migration
     public function up()
     {
     	Schema::create('orden_item', function (Blueprint $table) {
-    		$table->integer('orden_id')
+            $table->id();
+            $table->integer('orden_id')
     		->unsigned()
     		->index()
     		->foreign()
     		->references('id')
-    		->on('ordenes')
+    		->on('ordens')
     		->onDelete('cascade');
-    		$table->integer('elemento_id')
+            $table->integer('parent_id')
+            ->nullable()
+            ->unsigned()
+            ->index();
+    		$table->integer('item_id')
     		->unsigned();
-    		$table->string('elemento_type');
-    		$table->integer('estado');
-    		// 1= creada;
-    		// 2= en proceso
-    		// 3= en entrega
-    		// 4= completada
-    		// 5= cancelada
+    		$table->string('item_type');
     		$table->integer('cantidad')->default(1);
     		$table->decimal('precio', 8, 2);
     		$table->boolean('es_custom')->default(false);

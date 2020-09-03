@@ -39,7 +39,7 @@
 				<p>
 					Cree nuevas ordenes, añada menus, añada extras, personalice elementos. 
 				</p>
-				<a  href="{{ route('ordenes.create') }}"class="btn btn-lg btn-block btn-primary">Crear orden</a>
+				<a  href="{{ route('ordens.create') }}"class="btn btn-lg btn-block btn-primary">Crear orden</a>
 			</div>
 		</div>
 		<div class="card mb-4 box-shadow">
