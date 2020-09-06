@@ -100,6 +100,13 @@ class OrdenController extends Controller
 		return redirect()->route('ordens.show', $orden)->with('success', '¡Orden creada!');
 	}
 
+	public function mover(Request $request, Orden $orden) 
+	{
+		$orden->estado = 1;
+		$orden->save();
+		return redirect()->route('home')->with('success', '¡Orden enviada a cocina!');
+	}
+
 	public function attach(Request $request, Orden $orden) 
 	{
 		$elemento_id = $request->get('elemento_id');

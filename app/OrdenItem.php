@@ -18,8 +18,16 @@ class OrdenItem extends Model
     {
         return $this->hasMany(OrdenItem::class, 'parent_id', 'id');
     }
+
     public function parent()
     {
         return $this->belongsTo(OrdenItem::class, 'parent_id');
+    }
+
+    public function getElementoAttribute()
+    {
+        $elemento = Elemento::find($this->item_id);
+        return $elemento;
+        
     }
 }

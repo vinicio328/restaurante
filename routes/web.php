@@ -49,5 +49,6 @@ Route::group(['prefix' => '',
 		Route::resource('ordens', 'OrdenController');
 		Route::put('ordens/{orden}/attach', 'OrdenController@attach')->name('ordens.attach');
 		Route::put('ordens/{orden}/detach', 'OrdenController@detach')->name('ordens.detach');
-		Route::resource('ordens.menu.ordenitems', 'OrdenItemController');
+		Route::put('ordens/{orden}/mover', 'OrdenController@mover')->name('ordens.mover');
+		Route::resource('ordens.ordenitems', 'OrdenItemController');
 	});

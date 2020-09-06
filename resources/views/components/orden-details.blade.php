@@ -5,7 +5,7 @@
 			<h5>{{$menu->nombre}}</h5>
 		</div>
 		<div class="float-right">
-			<h5 class="text-right"><span class="badge badge-pill badge-danger">Q. @convert($menu->costo)</span>				
+			<h5 class="text-right"><span class="badge badge-pill badge-danger">Q. @convert($item->precio)</span>				
 				<form class="d-inline form-inline" action="{{ route('ordens.detach', $orden)}}" method="post">
 					@csrf
 					@method('PUT')
@@ -36,16 +36,16 @@
 		<p class="card-text">{{$elemento->descripcion}}</p>		
 		@endif
 	</div>
-	@if(@menu && $elementos)
+	@if($item && $item->children->count() > 0)
 	<div class="card-body">
 		
 		<h6>Elementos</h6>
 		<ul class="list-group list-group-flush">
-			@foreach($elementos as $elementoMenu)
+			@foreach($item->children as $elementoMenu)
 			<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 				<div class="d-flex w-100 justify-content-between">
 					<h5 class="mb-1">{{ $elementoMenu->elemento->nombre }}</h5>
-					<small>Q. @convert($elementoMenu->costo)</small>
+					<small>Q. @convert($elementoMenu->precio)</small>
 				</div>
 				<p class="mb-1">{{ $elementoMenu->elemento->descripcion }}</p>
 				<div class="row">					
@@ -58,7 +58,7 @@
 						</form>
 					</div>
 					<div class="col-2">
-						<a href="{{ route('ordens.menu.ordenitems.edit', [$orden, $item->id, $elementoMenu->id]) }}" data-toggle="tooltip" data-placement="top" title="Cambiar"  class="btn"><span class="fa fa-exchange-alt"></span></a>
+						<a href="{{ route('ordens.ordenitems.edit', [$orden, $elementoMenu]) }}" data-toggle="tooltip" data-placement="top" title="Cambiar"  class="btn"><span class="fa fa-exchange-alt"></span></a>
 					</div>
 				</div>
 			</div>

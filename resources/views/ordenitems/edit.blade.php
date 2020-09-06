@@ -26,19 +26,21 @@
 					</div>
 					<div class="card-body">
 						<div class="card">
+							<div class="card-header">
 							<div class="float-left">
-								<h5>{{$elemento->nombre}}</h5>
+								<h5>{{$ordenItem->elemento->nombre}}</h5>
 							</div>
 							<div class="float-right">
-								<h5 class="text-right"><span class="badge badge-pill badge-danger">Q. @convert($item->precio)</span>
+								<h5 class="text-right"><span class="badge badge-pill badge-danger">Q. @convert($ordenItem->precio)</span>
 								</h5>
 							</div>
 							<div class="clearfix"></div>
-							<p class="card-text">{{$elemento->descripcion}}</p>		
+							<p class="card-text">{{$ordenItem->elemento->descripcion}}</p>		
+							</div>
 						</div>
 					</div>
 					<div class="card-body">
-						<a href="{{ route('home')}}" class="btn btn-secondary">Regresar</a> 						
+						<a href="{{ route('ordens.show', $orden)}}" class="btn btn-secondary">Regresar</a> 						
 					</div>
 				</div>
 			</div>
@@ -52,12 +54,11 @@
 							<small>Q. @convert($elemento->costo)</small>
 						</div>
 						<p class="mb-1">{{ $elemento->descripcion }}</p>
-						<form action="{{ route('ordens.attach', $orden)}}" method="post">
+						<form action="{{ route('ordens.ordenitems.update', [$orden, $ordenItem])}}" method="post">
 							@csrf
 							@method('PUT')
-							<input type="hidden" name="elemento_type" value="elemento">
 							<input type="hidden" name="elemento_id" value="{{$elemento->id}}">
-							<button class="btn btn-primary" type="submit">Agregar</button>
+							<button class="btn btn-primary" type="submit">Cambiar</button>
 						</form>
 					</div>
 					@endforeach		

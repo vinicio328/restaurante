@@ -33,6 +33,11 @@
 					<div class="card-body">
 						<a href="{{ route('home')}}" class="btn btn-secondary">Regresar</a> 
 						<a href="{{ route('ordens.index')}}" class="btn btn-primary">Facturar</a> 
+						<form class="d-inline" action="{{ route('ordens.mover', $orden)}}" method="post">
+							@csrf
+							@method('PUT')
+							<button class="btn btn-primary" type="submit">Mandar a cocina</button>
+						</form> 
 						<form class="d-inline" action="{{ route('ordens.destroy', $orden)}}" method="post">
 							@csrf
 							@method('DELETE')

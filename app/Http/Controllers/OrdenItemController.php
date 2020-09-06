@@ -60,15 +60,16 @@ class OrdenItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Orden $orden, OrdenItem $orden_item)
+    public function edit(Orden $orden, $id)
     {
-        $elemento = Elemento::find($orden_item->item_id);
-        $elementos = Elemento::where('id', '!=', $orden_item->item_id);
+        $orden_item = OrdenItem::find($id);
+        //$elementos = Elemento::where('id', '!=', $id);
+        $elementos = Elemento::where('id', '!=', $orden_item->elemento->id)->get();
+
         return view('ordenitems.edit')
         ->withElementos($elementos)
         ->withOrdenItem($orden_item)
-        ->withOrden($orden)
-        ->withElemento($elemento);
+        ->withOrden($orden);
     }
 
     /**
@@ -78,9 +79,38 @@ class OrdenItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Orden $orden, $id)
     {
-        //
+        $orden_item = OrdenItem::find($id);
+        $elemento_id = $request->get('elemento_id');
+        $elemento = Elemento::find($elemento_id);
+        $menu = OrdenItem::find($orden_item->parent_id);
+        $nuevo_item = new OrdenItem();
+        $nuevo_item->orden_id = $orden->id;
+        $nuevo_item->item_id = $elemento_id;
+        $nuevo_item->cantidad = 1;
+        $nuevo_item->item_type = 'elemento';
+        $nuevo_item->es_custom = true;
+        $nuevo_item->precio = $elemento->costo;
+        $nuevo_item->parent_id = $menu->id;
+        $nuevo_item->save();
+        
+        if ($orden_item->es_custom) {
+            $menu->precio -= $orden_item->precio;
+            $orden->total -= $orden_item->precio;
+        }
+
+        $menu->precio += $elemento->costo;
+        $menu->save();
+
+        $orden->total += $elemento->costo;
+        $orden->save();
+
+        $nuevo_item->save();
+
+        $orden_item->delete();
+        return redirect()->route('ordens.show', $orden)->with('success', '¡Orden actualizada!');
+
     }
 
     /**
