@@ -54,7 +54,8 @@ class OrdenController extends Controller
 	{
 		$elementos = Elemento::all();
 		$menus = Menu::all();
-		return view('ordenes.show')->withOrden($orden)->withMenus($menus)->withElementos($elementos);
+		$items = $orden->menuItems->whereNull('parent_id');
+		return view('ordenes.show')->withOrden($orden)->withMenus($menus)->withElementos($elementos)->withItems($items);
 	}
 
 	/**
@@ -90,12 +91,13 @@ class OrdenController extends Controller
 			$nit = "CF";
 		}
 
+		$orden->estado = 0;
 		$orden->nombre = $nombre;
 		$orden->nit = $nit;
 		$orden->total = 0;
 		$orden->save();
 
-		return redirect()->route('ordenes.show', $orden)->with('success', '¡Orden creada!');
+		return redirect()->route('ordens.show', $orden)->with('success', '¡Orden creada!');
 	}
 
 	public function attach(Request $request, Orden $orden) 
@@ -144,6 +146,26 @@ class OrdenController extends Controller
 			$orden->total += $elemento->costo;
 			$orden->save();
 		}
+		return redirect()->route('ordens.show', $orden)->with('success', '¡Orden actualizada!');
+	}
+
+	public function detach(Request $request, Orden $orden)
+	{
+		$elemento_id = $request->get('elemento_id');
+		$type = $request->get('elemento_type');
+
+		if ($type == 'menu') 
+		{
+			$sub_items = OrdenItem::where('parent_id', $elemento_id);
+			$sub_items->delete();
+		}
+
+		$item = OrdenItem::find($elemento_id);
+		$item->delete();
+
+		$orden->total -= $item->precio;
+		$orden->save();
+		
 		return redirect()->route('ordens.show', $orden)->with('success', '¡Orden actualizada!');
 	}
 

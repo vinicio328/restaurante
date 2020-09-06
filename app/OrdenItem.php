@@ -9,7 +9,11 @@ class OrdenItem extends Model
 	protected $fillable = ['cantidad', 'es_extra'];
     protected $table = 'orden_item';
 
-
+    public function orden() 
+    {
+        return $this->belongsTo(Orden::class, 'orden_id');
+    }
+    
     public function children()
     {
         return $this->hasMany(OrdenItem::class, 'parent_id', 'id');

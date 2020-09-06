@@ -6,7 +6,7 @@
 		<h1>Agregar una orden</h1>
 		<br>
 		<div>	
-			<form class="flex flex-col w-full" method="POST" action="{{ route('ordenes.store') }}">
+			<form class="flex flex-col w-full" method="POST" action="{{ route('ordens.store') }}">
 				@csrf
 				<div class="form-group">    
 					<label for="nombre">Nombre:</label>

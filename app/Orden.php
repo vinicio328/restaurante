@@ -37,6 +37,11 @@ class Orden extends Model
         }
     }
 
+    public function menuItems()
+    {
+        return $this->hasMany(OrdenItem::class);
+    }
+
     public function menus()
     {
         return $this->morphedByMany(Menu::class, 'order_item');
