@@ -51,4 +51,5 @@ Route::group(['prefix' => '',
 		Route::put('ordens/{orden}/detach', 'OrdenController@detach')->name('ordens.detach');
 		Route::put('ordens/{orden}/mover', 'OrdenController@mover')->name('ordens.mover');
 		Route::resource('ordens.ordenitems', 'OrdenItemController');
+		Route::get('/dynamic_pdf/pdf/{orden_id}', 'PDFController@pdf')->name('orden.print'); 
 	});

@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
-use App\Estudiante;
+use App\Orden;
+use App\Menu;
+use App\Elemento;
+use App\ElemntoMenu;
+use App\MenuItem;
 
 class PDFController extends Controller
 {
-    //
     public function PDF($id){
-        $ordenitems = OrdenItems::FindOrFail($id);
-    	$pdf = PDF::loadView('factura', compact('ordenitems'));
-    	return $pdf->stream('factura.pdf');
-
+        $orden = Orden::FindOrFail($id);
+        $items = $orden->menuItems->whereNull('parent_id');
+    	$pdf = PDF::loadView('factura.factura', compact('orden', 'items'));
+    	return $pdf->stream('factura'.$id.'.pdf');
     }
     
 }

@@ -32,7 +32,7 @@
 					</div>
 					<div class="card-body">
 						<a href="{{ route('home')}}" class="btn btn-secondary">Regresar</a> 
-						<a href="{{ route('ordens.index')}}" class="btn btn-primary">Facturar</a> 
+						<a href="{{ route('orden.print', $orden)}}" class="btn btn-primary" target="_blank">Facturar</a> 
 						<form class="d-inline" action="{{ route('ordens.mover', $orden)}}" method="post">
 							@csrf
 							@method('PUT')

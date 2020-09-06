@@ -8,7 +8,7 @@ use App\Elemento;
 use App\OrdenItem;
 use App\Menu;
 
-class MenuDetails extends Component
+class FacturaDetails extends Component
 {
     public $message;
     public $orden;
@@ -22,22 +22,20 @@ class MenuDetails extends Component
      *
      * @return void
      */
-    public function __construct(rden $orden, OrdenItem $item, $message = '')
-    {        
-        $this->message = "TEst";
+    public function __construct(Orden $orden, OrdenItem $item)
+    {
         $this->orden = $orden;
         $this->item = $item;
-        $this->menu = $item;
-
-        if ($this->item->item_type == 'menu') {
+        
+        if ($item->item_type == 'menu') {
             $this->esMenu = true;
-            $this->menu == Menu::find($this->item->item_id);
+            $this->menu = Menu::find($item->item_id);
+            $this->elementos = $this->menu->items;
         } else {
             $this->esMenu = false;
-            $this->elemento == Elemento::find($this->item->item_id);
+            $this->elemento = Elemento::find($this->item->item_id);
         }
     }
-
 
     /**
      * Get the view / contents that represent the component.
@@ -46,6 +44,6 @@ class MenuDetails extends Component
      */
     public function render()
     {
-        return view('components.menu', ['menu' => $this->menu]);
+        return view('components.factura-details');
     }
 }

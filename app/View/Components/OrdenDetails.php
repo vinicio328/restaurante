@@ -3,11 +3,11 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+
 use App\Orden;
 use App\Elemento;
 use App\OrdenItem;
 use App\Menu;
-
 class OrdenDetails extends Component
 {
 	public $message;

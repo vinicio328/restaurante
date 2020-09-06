@@ -1,49 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        
-        <title>FACTURA</title>
+<head>
+	<meta charset="utf-8">
 
-        
-       
-    </head>
-    <body>
-        <h1 align="center">FACTURA</h1>
-        <strong>Numero de Factura:</strong>
-        <a>1</a>
-        <br>
-        <strong>Fecha:</strong>
-        <a>Guatemala 5 de Septiembre de 2,020</a>
-        <br>
-        <strong>Nombre del cliente:</strong>
-        <a>Raul Eduardo Andres Prado</a>
-        <br>
-        <strong>NIT:</strong>
-        <a>123456-6</a>
-        <div align="center">
-            <table border style="border: 1px solid black" border cellpadding=30,10,10,30 cellpadding=0>
-                <thead >
-                    <tr >
-                        <th rowspan="3">Cantidad</th>
-                        <th>   Cantidad Extras</th>
-                        <th>   Descripcion</th>
-                        <th>   Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>Menu de pollo </td>
-                    <td>Q45.00</td>
-                    
-                
-                </tbody>
+	<title>FACTURA</title>        
+	<style>
+		th, td {
+  border-bottom: 1px solid #ddd;
+}
+		table {
+			width: 100%;
+		}
 
-            </table>
+		th {
+			height: 50px;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<h1 align="center">FACTURA</h1>
+	<strong>Numero de Factura:</strong>
+	<a>{{$orden->id}}</a>
+	<br>
+	<strong>Fecha:</strong>
+	<a>{{$orden->created_at}}</a>
+	<br>
+	<strong>Nombre del cliente:</strong>
+	<a>{{ $orden->nombre }}</a>
+	<br>
+	<strong>NIT:</strong>
+	<a>{{$orden->nit}}</a>
+	<br>
+	<div align="center">
+		<table>
+			<thead >
+				<tr>
+					<th width="10%">Codigo</th>
+					<th width="5%"></th>
+					<th>Descripcion</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($items as $item)
+				<x-factura-details :item="$item" :orden="$orden"></x-factura-details>
+				@endforeach
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td>TOTAL</td>
+					<td>Q. @convert($orden->total)</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
 
 
-        </div>
-            
-    </body>
+</body>
 </html>
