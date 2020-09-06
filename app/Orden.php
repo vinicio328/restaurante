@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Orden extends Model
 {
+    protected $fillable = ['estado', 'nombre', 'nit', 'total'];
+
     // Agregar mutador 
     // 1= creada;
     // 2= en proceso
@@ -33,6 +35,11 @@ class Orden extends Model
         {
             return "Cancelada";
         }
+    }
+
+    public function menuItems()
+    {
+        return $this->hasMany(OrdenItem::class);
     }
 
     public function menus()

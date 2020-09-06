@@ -80,7 +80,6 @@
 							<small>Q. @convert($elemento->costo)</small>
 						</div>
 						<p class="mb-1">{{ $elemento->descripcion }}</p>
-						<small>Donec id elit non mi porta.</small>
 						<form action="{{ route('menus.attach', $menu)}}" method="post">
 							@csrf
 							@method('PUT')

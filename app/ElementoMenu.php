@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ElementoMenu extends Model
 {
-	protected $fillable = ['cantidad', 'custom'];
-	protected $table = 'elemento_menu';
+	protected $fillable = ['orden_id', 'parent_id', 'item_id', 'item_type', 'cantidad', 'precio', 'es_custom', 'es_extra'];
+	protected $table = 'elemento_menu';	
 
 	public function menu() 
 	{
