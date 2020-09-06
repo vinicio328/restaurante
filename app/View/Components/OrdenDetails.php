@@ -17,16 +17,17 @@ class OrdenDetails extends Component
 	public $menu;
 	public $elemento;
 	public $elementos;
+	public $details;
 	/**
 	 * Create a new component instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(Orden $orden, OrdenItem $item)
+	public function __construct(Orden $orden, OrdenItem $item, $details = false)
 	{
 		$this->orden = $orden;
 		$this->item = $item;
-		
+		$this->details = $details;
 		if ($item->item_type == 'menu') {
 			$this->esMenu = true;
 			$this->menu = Menu::find($item->item_id);

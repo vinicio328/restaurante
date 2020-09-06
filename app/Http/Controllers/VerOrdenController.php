@@ -25,7 +25,7 @@ class VerOrdenController extends Controller
             $ordens = Orden::where('estado', 3)
                 ->orderBy('created_at')
                 ->get();
-        }        
+        }
 
         return view('verorden.index', compact('ordens'));
     }

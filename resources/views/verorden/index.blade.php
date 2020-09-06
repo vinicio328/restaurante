@@ -28,8 +28,11 @@
 					<h6 class="card-subtitle mb-2 text-muted">{{ $orden->nombre }} | {{ $orden->nit }}</h6>
 					<p class="card-text">Estado: {{ $orden->estado }}</p>
 				</div>
-				<ul class="list-group list-group-flash">
-				</ul>
+				<div class="card-body" >
+					@foreach($orden->menuItems->whereNull('parent_id') as $item)
+						<x-orden-details :details=true :item="$item" :orden="$orden"></x-orden-details>
+					@endforeach
+				</div>
 				<div class="card-body">
 					<div class="row">							
 						@role('mostrador')
